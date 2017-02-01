@@ -3,16 +3,18 @@ import matplotlib.pyplot as plt
 import cPickle
 from Linear_Regression import Data_Base, Linear_Classifier, make_data_set, Linear_Classifier_nD
 
+print('Part 3')
 imdb1 = Data_Base('training_set.txt','cropped/', {'Hader': -1, 'Carell': 1})
-'''
+
 classifier1 = Linear_Classifier(imdb1)
 classifier1.grad_descent()
+'''
 with open('linear_classifier1-2.pkl', 'wb') as f:
     cPickle.dump(classifier1,f,protocol=-1)
 
 '''
-with open('linear_classifier.pkl','rb') as f:
-    classifier1 = cPickle.load(f)
+#with open('linear_classifier.pkl','rb') as f:
+    #classifier1 = cPickle.load(f)
 
 #################### Validation Part 3###################################
 imdb_val = Data_Base('validation_set.txt','cropped/', {'Hader': int(-1), 'Carell': int(1)})
@@ -73,6 +75,7 @@ print(accuracy)
 #0.95
 
 #################### Part 4 #######################################
+print('Part 4')
 heatmap = classifier1.linear_weights[1:].reshape((32,32))
 plt.imsave('Image_outputs/200image_trained.png',heatmap)
 hmap = plt.imshow(heatmap, cmap='gray', interpolation= 'nearest')
@@ -83,7 +86,7 @@ iters = np.linspace(0,errors.size-1,errors.size)
 error_descent = plt.plot(iters,errors)
 plt.ylabel('Error')
 plt.xlabel('Iteration')
-plt.show(error_descent)
+plt.savefig('Classifier1_training lossn.png')
 
 with open('4imgset.txt','wb') as f:
     f.write('carell44.jpg\tCarell\n'
@@ -104,6 +107,7 @@ hmap2 = plt.imshow(heatmap,cmap='gray', interpolation= 'None')
 #plt.show(hmap2)
 
 #################### Part 5 #######################################
+print('Part 5')
 make_data_set(['Fran Drescher', 'America Ferrera', 'Kristin Chenoweth', 'Alec Baldwin', 'Bill Hader', 'Steve Carell'],'5a',140)
 make_data_set(['Fran Drescher', 'America Ferrera', 'Kristin Chenoweth', 'Alec Baldwin', 'Bill Hader', 'Steve Carell'],'5b',110)
 make_data_set(['Fran Drescher', 'America Ferrera', 'Kristin Chenoweth', 'Alec Baldwin', 'Bill Hader', 'Steve Carell'],'5c',80)
@@ -133,13 +137,14 @@ training_res = np.ndarray(5)
 
 #run regression
 for db in dbs:
-    #classifier5 = Linear_Classifier(db)
-    #classifier5.grad_descent()
+    classifier5 = Linear_Classifier(db)
+    classifier5.grad_descent()
     #with open('linear_classifier%s-2.pkl'%ids[i], 'wb') as f:
     #    cPickle.dump(classifier5,f,protocol=-1)
 
-    with open('linear_classifier%s-2.pkl'%ids[i], 'rb') as f:
-        classifier5 = cPickle.load(f)
+    #with open('linear_classifier%s-2.pkl'%ids[i], 'rb') as f:
+    #    classifier5 = cPickle.load(f)
+
     output_training = classifier5.forward()
     pred = np.zeros(output_training.shape, dtype=int)
 
@@ -160,12 +165,12 @@ for db in dbs:
     i+=1
 
 
-    plt.plot([140, 110, 80, 50, 20], training_res)
-    plt.ylim([0.9,1])
-    plt.xlabel('Number of Image per actor')
-    plt.ylabel('Accuracy on training set')
-    #plt.show()
-    plt.savefig('Image_outputs/training_res_part5.png')
+plt.plot([140, 110, 80, 50, 20], training_res)
+plt.ylim([0.9,1])
+plt.xlabel('Number of Image per actor')
+plt.ylabel('Accuracy on training set')
+#plt.show()
+plt.savefig('Image_outputs/training_res_part5.png')
 
 #test classifiers
 testing_results = np.ndarray((5,2))
@@ -225,7 +230,7 @@ plt.plot([140, 110, 80, 50, 20], testing_results[:,1])
 plt.xlabel('Number of Image per actor')
 plt.ylabel('Accuracy')
 plt.legend(['Validation','Testing'])
-plt.show()
+plt.savefig('N_im_vs_pref.png')
 '''
 Validation Loss
 0.0556209862341
@@ -270,7 +275,7 @@ Testing accuracy:
 '''
 
 #################### Part 6 #######################################
-
+print('Part 6')
 #create new set of data
 imdb6 = Data_Base('training_set5a.txt','cropped/',
                  {'Drescher':[1,0,0,0,0,0], 'Ferrera':[0,1,0,0,0,0], 'Chenoweth':[0,0,1,0,0,0],
@@ -291,14 +296,15 @@ for point in points:
     print "Manual Derivative: %f \tFrom Gradient: %f" %(true_deri, cl_grad[point[0],point[1]])
 
 #################### Part 7 #######################################
+print('Part 7-8')
 #Perform gradient descent and save file for future use
 classifier6.grad_descent()
 '''
 with open('classifier6.pkl','wb') as f:
     cPickle.dump(classifier6,f,protocol = -1)
 '''
-with open('classifier6.pkl','rb') as f:
-    classifier6 = cPickle.load(f)
+#with open('classifier6.pkl','rb') as f:
+    #classifier6 = cPickle.load(f)
 
 weights = classifier6.linear_weights.copy()
 
@@ -344,7 +350,7 @@ for j in range(0,6):
     heatmap +=1.
     #heatmap = plt.imshow(heatmap, cmap='heat', interpolation='None')
     #plt.show()
-    hmap7 = plt.imsave('Image_outputs/actor_%i_of_6.png'%(j+1),heatmap,cmap='coolwarm')
+    hmap7 = plt.imsave('Image_outputs/actor_%i_of_6_less_trained.png'%(j+1),heatmap,cmap='coolwarm')
 
 
 

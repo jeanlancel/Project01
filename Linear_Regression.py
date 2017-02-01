@@ -98,7 +98,7 @@ class Linear_Classifier(object):
             self.linear_weights -= self.step_size * grad
             if iter % self.report_iter == 0:
                 print "Iter", iter
-                print "f(x) = %.2f" % (error)
+                print "f(x) = %.5f" % (error)
                 print "Gradient Magnitude: ", np.linalg.norm(grad), "\n"
                 self.f_t[int(iter//self.report_iter)] = error
             iter += 1
@@ -110,7 +110,7 @@ class Linear_Classifier(object):
 class Linear_Classifier_nD(object):
     def __init__(self, db):
         self.step_size = 0.001
-        self.EPS = 1e-5
+        self.EPS = 5e-5
         self.max_iter = 1e5
         self.report_iter = 500
         self.subtract_image_mean = True
@@ -171,7 +171,7 @@ class Linear_Classifier_nD(object):
             self.linear_weights -= self.step_size * grad
             if iter % self.report_iter == 0:
                 print "Iter", iter
-                print "f(x) = %.2f" % (error)
+                print "f(x) = %.5f" % (error)
                 print "Gradient Magnitude: ", np.linalg.norm(grad), "\n"
                 self.f_t[int(iter//self.report_iter)] = error
             iter += 1
