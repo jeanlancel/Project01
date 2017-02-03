@@ -14,7 +14,7 @@ import urllib
 
 
 #act = list(set([a.split("\t")[0] for a in open("facescrub_actors.txt").readlines()]))
-act =['Gerard Butler', 'Daniel Radcliffe', 'Michael Vartan', 'Lorraine Bracco', 'Peri Gilpin', 'Angie Harmon']
+act =['Fran Drescher', 'America Ferrera', 'Kristin Chenoweth', 'Alec Baldwin', 'Bill Hader', 'Steve Carell','Gerard Butler', 'Daniel Radcliffe', 'Michael Vartan', 'Lorraine Bracco', 'Peri Gilpin', 'Angie Harmon']
 
 def timeout(func, args=(), kwargs={}, timeout_duration=1, default=None):
     '''From:
